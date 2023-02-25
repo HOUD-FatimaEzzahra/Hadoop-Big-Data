@@ -1,0 +1,6 @@
+job2\ProduitsMapper.class
+job1\VentesMapper.class
+job1\VentesReducer.class
+job1\VentesDriver.class
+job2\ProduitsDriver.class
+job2\ProduitsReducer.class
