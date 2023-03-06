@@ -11,10 +11,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class ProduitsDriver {
 
     public static void main(String[] args) throws Exception {
-       /* if (args.length != 3) {
-            System.err.println("Usage: ProductSalesJob <input path> <output path> <year>");
-            System.exit(-1);
-        }*/
         Configuration configuration = new Configuration();
         Job job = Job.getInstance(configuration, "Total des produits vendus par ville pour l'année : " + args[2]);
         job.setJarByClass(ProduitsDriver.class);
