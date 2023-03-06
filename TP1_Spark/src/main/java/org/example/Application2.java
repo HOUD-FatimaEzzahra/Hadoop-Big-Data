@@ -12,7 +12,7 @@ import java.util.List;
 public class Application2 {
     public static void main(String[] args) {
         SparkConf sparkConf=new SparkConf();
-        sparkConf.setAppName("TP Word Count").setMaster("locate[*]");
+        sparkConf.setAppName("TP Word Count").setMaster("local[*]");
         JavaSparkContext sc=new JavaSparkContext(sparkConf);
         JavaRDD<String> lines=sc.textFile("names.txt");
         JavaRDD<String> words=lines.flatMap((line)-> Arrays.asList(line.split(" ")).iterator());

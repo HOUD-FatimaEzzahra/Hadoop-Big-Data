@@ -11,7 +11,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         SparkConf sparkConf=new SparkConf();
-        sparkConf.setAppName("TP 1 Spark").setMaster("locale[*]");
+        sparkConf.setAppName("TP 1 Spark").setMaster("local[*]");
         JavaSparkContext sc=new JavaSparkContext(sparkConf);
         JavaRDD<Double> javaRDD1=sc.parallelize(Arrays.asList(12.0,2.9,3.0,10.5,23.1));
         JavaRDD<Double> javaRDD2=javaRDD1.map((a) -> a+1);
