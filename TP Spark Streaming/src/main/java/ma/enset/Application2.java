@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 public class Application2 {
     public static void main(String[] args) throws InterruptedException {
-
         Logger.getLogger("org").setLevel(Level.OFF);
         // Create a local StreamingContext with two working thread and batch interval of 1 second
         SparkConf conf = new SparkConf().setMaster("local[*]").setAppName("NetworkWordCount");
@@ -26,10 +25,8 @@ public class Application2 {
 // Count each word in each batch
         JavaPairDStream<String, Integer> pairs = words.mapToPair(s -> new Tuple2<>(s, 1));
         JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey((i1, i2) -> i1 + i2);
-
 // Print the first ten elements of each RDD generated in this DStream to the console
         wordCounts.print();
-
         jssc.start();              // Start the computation
         jssc.awaitTermination();   // Wait for the computation to terminate
     }
