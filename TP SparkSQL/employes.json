@@ -1,0 +1,6 @@
+[
+  {"id": 1, "nom": "fatiza", "age": 21, "departement": "info", "salaire": 15000},
+  {"id": 2, "nom": "najwa", "age": 41, "departement": "elec", "salaire": 17000},
+  {"id": 3, "nom": "imane", "age": 22, "departement": "mec", "salaire": 12000},
+  {"id": 4, "nom": "hind", "age": 35, "departement": "info", "salaire": 8000}
+]
