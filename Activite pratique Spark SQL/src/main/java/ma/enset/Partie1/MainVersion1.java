@@ -1,16 +1,20 @@
-package ma.enset;
+package ma.enset.Partie1;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.functions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
+
+import static org.apache.spark.sql.functions.col;
 
 public class MainVersion1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TimeoutException {
         Logger.getLogger("org").setLevel(Level.OFF);
         SparkSession ss = SparkSession.builder().master("local[*]").appName("Activité pratique Spark SQL").getOrCreate();
         Map<String, String> options = new HashMap<>();
@@ -81,8 +85,28 @@ public class MainVersion1 {
         Dataset<Row> incidentsParService = ss.read().option("header",true).option("inferSchema",true).csv("/streaming/incidents.csv");
         incidentsParService.show();
 
-        //I
-        System.out.println("Nombre d'incidents par service");
+        // Question 1 : Afficher d’une manière continue le nombre d’incidents par service.
+        Dataset<Row> nbIncidentsByService = incidentsParService.groupBy("service")
+                .agg(functions.count("*").alias("nb_incidents"));
+
+        nbIncidentsByService.writeStream()
+                .outputMode("complete")
+                .format("console")
+                .start();
+
+        // Question 2 : Afficher d’une manière continue les deux année ou il a y avait plus d’incidents.
+        Dataset<Row> incidentsByYear = incidentsParService.withColumn("year", functions.year(col("date")))
+                .groupBy("year")
+                .agg(functions.count("*").alias("nb_incidents"))
+                .orderBy(functions.desc("nb_incidents"))
+                .limit(2);
+
+        incidentsByYear.writeStream()
+                .outputMode("complete")
+                .format("console")
+                .start();
+
+
 
 
 

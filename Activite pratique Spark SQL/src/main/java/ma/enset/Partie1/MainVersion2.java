@@ -1,4 +1,4 @@
-package ma.enset;
+package ma.enset.Partie1;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -50,8 +50,8 @@ public class MainVersion2 {
 
         // Question 1 : Afficher le nombre de consultations par jour
         System.out.println("le nombre de consultations par jour");
-        Dataset<Row> nbConsultationsParJour = dfConsultation.groupBy("date_consultation")
-                .agg(functions.count("*").alias("nb_consultations"));
+        Dataset<Row> nbConsultationsParJour = dfConsultation.groupBy("nombre de consultations")
+                .agg(functions.count("*").alias("nombre de consultations"));
 
         nbConsultationsParJour.show();
 
@@ -60,9 +60,9 @@ public class MainVersion2 {
         Dataset<Row> nbConsultationsParMedecin = dfConsultation.join(dfMedecin,
                         dfConsultation.col("id_medecin").equalTo(dfMedecin.col("id")))
                 .groupBy("nom", "prenom")
-                .agg(functions.count("*").alias("nb_consultations"))
-                .select("nom", "prenom", "nb_consultations")
-                .orderBy(functions.desc("nb_consultations"));
+                .agg(functions.count("*").alias("nombre de consultations"))
+                .select("nom", "prenom", "nombre de consultations")
+                .orderBy(functions.desc("nombre de consultations"));
 
         nbConsultationsParMedecin.show();
 
@@ -74,7 +74,7 @@ public class MainVersion2 {
                 .groupBy(dfMedecin.col("id"), dfMedecin.col("nom"), dfMedecin.col("prenom"))
                 .agg(functions.countDistinct(dfPatient.col("id")).alias("nb_patients"))
                 .select(dfMedecin.col("nom"), dfMedecin.col("prenom"), functions.col("nb_patients"))
-                .orderBy(functions.desc("nb_patients"));
+                .orderBy(functions.desc("nombre d'incidents"));
         nbPatientsParMedecin.show();
     }
 }
