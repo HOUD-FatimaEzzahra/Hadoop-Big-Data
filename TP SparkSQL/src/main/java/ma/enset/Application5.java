@@ -23,6 +23,6 @@ public class Application5 {
         //RDD to dataSet
         Dataset<Employe> ds= ss.createDataset(employeJavaRDD2.rdd(),employeEncoder);
         ds.show();
-        
+
     }
 }
