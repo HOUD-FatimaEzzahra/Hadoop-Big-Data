@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainVersionSQL {
+public class MainVersion1 {
     public static void main(String[] args) {
         Logger.getLogger("org").setLevel(Level.OFF);
         SparkSession ss = SparkSession.builder().master("local[*]").appName("Activité pratique Spark SQL").getOrCreate();
@@ -76,6 +76,17 @@ public class MainVersionSQL {
 
 
         //PARTIE II
+
+        System.out.println("Table incendies");
+        Dataset<Row> incidentsParService = ss.read().option("header",true).option("inferSchema",true).csv("/streaming/incidents.csv");
+        incidentsParService.show();
+
+        //I
+        System.out.println("Nombre d'incidents par service");
+
+
+
+
 
     }
 }
