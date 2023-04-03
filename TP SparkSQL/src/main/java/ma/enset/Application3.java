@@ -15,7 +15,7 @@ public class Application3 {
         SparkSession ss = SparkSession.builder().master("local[*]").appName("tp spark sql").getOrCreate();
         Map<String, String> options = new HashMap<>();
         options.put("driver", "com.mysql.cj.jdbc.Driver");
-        options.put("ur", "jdbc:mysql://localhost:3306/DBEmployes");
+        options.put("url", "jdbc:mysql://localhost:3306/BDEmployes");
         options.put("user", "root");
         options.put("password", "fatiza");
         Dataset<Row> dfEmploy = ss.read().format("jdbc")
@@ -24,6 +24,5 @@ public class Application3 {
                                 .load();
         dfEmploy.printSchema();
         dfEmploy.show();
-
     }
 }
